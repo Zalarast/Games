@@ -1,0 +1,24 @@
+.NotFound {
+    height: 100vh;
+    background-image: url("../img/notFoundBgImg.jpg");
+    background-size: 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Impact, Charcoal, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.backToMenu {
+        font-size: 30px;
+        color: rgb(218, 11, 11);
+        cursor: pointer;
+        text-decoration: none;
+        text-shadow: white 1px 1px 20px, white 1px 1px 30px, white 1px 1px 40px, white 1px 1px 50px;
+}
+
+.backToMenu:hover {
+    color: rgb(11, 218, 38);
+}
