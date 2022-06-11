@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Main, NotFound } from "./pages";
+import { Main, NotFound, PoleChudes, Saper } from "./pages";
 
 function App() {
   return (
@@ -8,6 +8,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/Saper" element={<Saper />} />
+        <Route path="/PoleChudes" element={<PoleChudes />} />
       </Routes>
     </div>
   );
