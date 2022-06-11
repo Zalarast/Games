@@ -11,14 +11,6 @@
     justify-content: center;
 }
 
-.backToMenu {
-        font-size: 30px;
-        color: rgb(218, 11, 11);
-        cursor: pointer;
-        text-decoration: none;
-        text-shadow: white 1px 1px 20px, white 1px 1px 30px, white 1px 1px 40px, white 1px 1px 50px;
-}
-
 .backToMenu:hover {
     color: rgb(11, 218, 38);
 }
