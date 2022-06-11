@@ -10,6 +10,7 @@
 }
 
 .title {
+    cursor: default;
     align-self: center;
     justify-self: start;
     margin-top: -18px;
@@ -22,11 +23,13 @@
 }
 
 .item {
+    margin-top: 30px;
     font-size: 30px;
     color: rgb(11, 218, 38);
     transition: all 0.3s ease;
     animation: pulse 2s infinite ease-in-out;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .item:hover {

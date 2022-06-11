@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
 import "../CSS/Main.css"
 export default function Main () {
     return (<div className="Main">
         <h1 className="title">Welcome</h1>
-        <span className="item">Сапёр</span>
+        <Link to="/Saper" className="item">Сапёр</Link>
+        <Link to="/PoleChudes" className="item">Поле чудес</Link>
     </div>)
 }
