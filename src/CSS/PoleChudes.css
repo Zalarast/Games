@@ -70,10 +70,3 @@ button:hover {
     cursor: default;
     text-transform: uppercase;
 }
-
-.char {
-    display: none;
-}
-.char.find {
-    display: block;
-}

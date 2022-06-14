@@ -4,9 +4,14 @@ import "../CSS/PoleChudes.css";
 
 export default function PoleChudes() {
   const [word, setWord] = React.useState("");
+  const [chars, setChars] = React.useState("");
+  const [charMacth, setCharMacth] = React.useState<string[]>([]);
   const [step, setStep] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
   const handleChangeWord = (e: React.ChangeEvent<HTMLInputElement>) =>
     setWord(e.target.value);
+
   const startGame = () => {
     if (!word) {
       alert("Слово не указано");
@@ -14,16 +19,50 @@ export default function PoleChudes() {
       setStep(1);
     }
   };
-  const findChar = () => {
-    const elem = document.querySelectorAll("[id^='А']");
-    if (elem.length > 0) {
-      for (const e of elem) {
-        e.className += " find";
-      }
-    } else {
-      alert("Такой буквы нет");
-    }
+
+  const endGame = () => {
+    alert("Вы выйграли!");
+    setWord("");
+    setCharMacth([]);
+    setCount(0);
+    setStep(0);
+  }
+
+  const handleChangeChar = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 1 || e.target.value.length === 0)
+      setChars(e.target.value);
   };
+
+  const findChar = () => {
+    if (chars) {
+      if (!charMacth.includes(chars)) {
+        if (word.includes(chars)) {
+          setCharMacth((char) => [...char, chars]);
+          setCount(
+            (count) =>
+              count +
+              word.split("").filter((char) => char === chars && char).length
+          );
+          setChars("");
+        } else {
+          alert("Такой буквы нет");
+        }
+      } else {
+        alert("Буква уже имеется");
+        setChars("");
+      }
+    } else alert("Буква не указана");
+  };
+
+  React.useEffect(() => {
+    if (word)
+      if (count === word.length) {
+        setTimeout(()=>{
+          endGame();
+        }, 500);
+      }
+  }, [count, word]);
+
   return (
     <div className="PoleChudes">
       <h1 className="title">Поле чудес</h1>
@@ -39,14 +78,14 @@ export default function PoleChudes() {
           <div className="word">
             {word.split("").map((val, i) => (
               <span key={i} className="charBox">
-                <span className="char" id={val}>
-                  {val}
-                </span>
+                {charMacth.includes(val) && val}
               </span>
             ))}
           </div>
-          <input />
-          <button onClick={findChar}>Ввод</button>
+          <input onChange={handleChangeChar} value={chars} />
+          <button onClick={findChar}>
+            Ввод
+          </button>
         </div>
       )}
 
