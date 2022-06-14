@@ -21,12 +21,17 @@ export default function PoleChudes() {
   };
 
   const endGame = () => {
-    alert("Вы выйграли!");
-    setWord("");
-    setCharMacth([]);
-    setCount(0);
-    setStep(0);
-  }
+    if (word) 
+      if (count === word.length) {
+        setTimeout(() => {
+          alert("Вы выйграли!");
+          setWord("");
+          setCharMacth([]);
+          setCount(0);
+          setStep(0);
+        }, 100);
+    }
+  };
 
   const handleChangeChar = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 1 || e.target.value.length === 0)
@@ -54,14 +59,8 @@ export default function PoleChudes() {
     } else alert("Буква не указана");
   };
 
-  React.useEffect(() => {
-    if (word)
-      if (count === word.length) {
-        setTimeout(()=>{
-          endGame();
-        }, 500);
-      }
-  }, [count, word]);
+  // eslint-disable-next-line
+  React.useEffect(() => endGame(), [count]);
 
   return (
     <div className="PoleChudes">
@@ -83,9 +82,7 @@ export default function PoleChudes() {
             ))}
           </div>
           <input onChange={handleChangeChar} value={chars} />
-          <button onClick={findChar}>
-            Ввод
-          </button>
+          <button onClick={findChar}>Ввод</button>
         </div>
       )}
 
