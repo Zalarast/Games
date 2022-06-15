@@ -7,7 +7,6 @@ export default function PoleChudes() {
   const [chars, setChars] = React.useState("");
   const [charMacth, setCharMacth] = React.useState<string[]>([]);
   const [step, setStep] = React.useState(0);
-  const [count, setCount] = React.useState(0);
 
   const handleChangeWord = (e: React.ChangeEvent<HTMLInputElement>) =>
     setWord(e.target.value);
@@ -20,16 +19,22 @@ export default function PoleChudes() {
     }
   };
 
+  const isAllTrue = () => {
+    if (!word) return false;
+    for (const char of word.split(""))
+      if (!charMacth.includes(char)) return false;
+
+    return true;
+  };
+
   const endGame = () => {
-    if (word) 
-      if (count === word.length) {
-        setTimeout(() => {
-          alert("Вы выйграли!");
-          setWord("");
-          setCharMacth([]);
-          setCount(0);
-          setStep(0);
-        }, 100);
+    if (isAllTrue()) {
+      setTimeout(() => {
+        alert("Вы выйграли!");
+        setWord("");
+        setCharMacth([]);
+        setStep(0);
+      }, 100);
     }
   };
 
@@ -43,11 +48,6 @@ export default function PoleChudes() {
       if (!charMacth.includes(chars)) {
         if (word.includes(chars)) {
           setCharMacth((char) => [...char, chars]);
-          setCount(
-            (count) =>
-              count +
-              word.split("").filter((char) => char === chars && char).length
-          );
           setChars("");
         } else {
           alert("Такой буквы нет");
@@ -59,9 +59,10 @@ export default function PoleChudes() {
     } else alert("Буква не указана");
   };
 
-  // eslint-disable-next-line
-  React.useEffect(() => endGame(), [count]);
-
+  React.useEffect(() => {
+    endGame();
+  }, [charMacth]);
+  
   return (
     <div className="PoleChudes">
       <h1 className="title">Поле чудес</h1>
