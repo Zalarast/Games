@@ -22,7 +22,7 @@ export default function PoleChudes() {
   const isAllTrue = () => {
     if (!word) return false;
     for (const char of word.split(""))
-      if (!charMacth.includes(char)) return false;
+      if (!charMacth.includes(char.toUpperCase())) return false;
 
     return true;
   };
@@ -46,8 +46,8 @@ export default function PoleChudes() {
   const findChar = () => {
     if (chars) {
       if (!charMacth.includes(chars)) {
-        if (word.includes(chars)) {
-          setCharMacth((char) => [...char, chars]);
+        if (word.toUpperCase().includes(chars.toUpperCase())) {
+          setCharMacth((char) => [...char, chars.toUpperCase()]);
           setChars("");
         } else {
           alert("Такой буквы нет");
@@ -62,7 +62,7 @@ export default function PoleChudes() {
   React.useEffect(() => {
     endGame();
   }, [charMacth]);
-  
+
   return (
     <div className="PoleChudes">
       <h1 className="title">Поле чудес</h1>
@@ -78,7 +78,7 @@ export default function PoleChudes() {
           <div className="word">
             {word.split("").map((val, i) => (
               <span key={i} className="charBox">
-                {charMacth.includes(val) && val}
+                {charMacth.includes(val.toUpperCase()) && val}
               </span>
             ))}
           </div>
